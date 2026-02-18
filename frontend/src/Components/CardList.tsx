@@ -1,15 +1,23 @@
 import React, { type JSX } from 'react';
 import Card from './Card'
+import type { CompanySearch } from '../../company';
+import { v4 as uuidv4 } from "uuid";
 
-interface Props {}
+interface Props {
+  searchResults: CompanySearch[];
+}
 
-const CardList:React.FC<Props> = (props: Props): JSX.Element => {
+const CardList:React.FC<Props> = ({searchResults}: Props): JSX.Element => {
   return (
-    <div>
-        <Card companyName="Apple" ticker="APPL" price={260} icon='https://cdn-images.imagevenue.com/ca/0b/1a/ME1CE7CK_o.png' />
-        <Card companyName="Microsoft" ticker="MSFT" price={398} icon='https://cdn-images.imagevenue.com/54/32/bd/ME1CE7CV_o.png' />
-        <Card companyName="Telsa" ticker="TSLA" price={404} icon='https://cdn-images.imagevenue.com/3a/71/c4/ME1CE7CC_o.png' />
-    </div>
+    <>
+      {searchResults.length > 0 ? (
+        searchResults.map((result) => {
+          return <Card id={result.symbol} key={uuidv4()} searchResult={result}/>;
+        })
+      ) : (
+        <h1></h1>
+      )}
+    </>
   );
 }
 
