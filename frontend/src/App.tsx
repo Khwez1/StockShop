@@ -1,22 +1,37 @@
-import { useState, type ChangeEvent, type SyntheticEvent } from 'react';
-import CardList from './Components/CardList'
-import Search from './Components/Search';
-import { type CompanySearch } from '../company';
-import { searchCompanies } from './api';
+import { useState, type ChangeEvent, type SyntheticEvent } from "react";
+import CardList from "./Components/CardList";
+import Search from "./Components/Search";
+import { type CompanySearch } from "../company";
+import { searchCompanies } from "./api";
+import ListPortfolio from "./Components/ListPortfolio";
+import Navbar from "./Components/Navbar";
+import Hero from "./Components/Hero";
 
 function App() {
   const [search, setSearch] = useState<string>("");
-  const [searchResult, setSearchResult] = useState<CompanySearch[]>([])
-  const [serverError, setServerError] = useState<string>("");
+  const [portfolioValues, setPortfolioValues] = useState<string[]>([]);
+  const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
+  const [serverError, setServerError] = useState<string | null>(null);
 
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement, Element>) => {    
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement, Element>) => {
     setSearch(e.target.value);
   };
 
-  const onPortfolioCreate = (e: SyntheticEvent) => {
+  const onPortfolioCreate = (e: any) => {
     e.preventDefault();
-    console.log(e);
-  }
+    const exists = portfolioValues.find((value) => value === e.target[0].value);
+    if (exists) return;
+    const updatedPortfolio = [...portfolioValues, e.target[0].value];
+    setPortfolioValues(updatedPortfolio);
+  };
+
+  const onPortfolioDelete = (e: any) => {
+    e.preventDefault();
+    const removed = portfolioValues.filter((value) => {
+      return value !== e.target[0].value;
+    });
+    setPortfolioValues(removed);
+  };
 
   const onSearchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -31,11 +46,24 @@ function App() {
 
   return (
     <>
-      <Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange} />
-      <CardList searchResults={searchResult} onPortfolioCreate={onPortfolioCreate} />
+    <Navbar />
+    {/* <Hero /> */}
+      <Search
+        onSearchSubmit={onSearchSubmit}
+        search={search}
+        handleSearchChange={handleSearchChange}
+      />
+      <ListPortfolio
+        portfolioValues={portfolioValues}
+        onPortfolioDelete={onPortfolioDelete}
+      />
+      <CardList
+        searchResults={searchResult}
+        onPortfolioCreate={onPortfolioCreate}
+      />
       {serverError && <div>Unable to connect to API</div>}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
