@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { CompanyProfile, CompanySearch, CompanyKeyMetrics } from "../company"
+import type { CompanyProfile, CompanySearch, CompanyKeyMetrics, CompanyIncomeStatement } from "../company"
 
 interface SearchResponse {
     data: CompanySearch[];
@@ -53,5 +53,39 @@ export const getKeyMetrics = async (query: string) => {
             console.log("unexpected error: ", error);
             return "an expected error has occured."
         }
-    }
+    };
+};
+
+export const getIncomeStatement = async (query: string) => {
+    try {
+        const data = await axios.get<CompanyIncomeStatement[]>(
+            `https://financialmodelingprep.com/stable/income-statement?symbol=${query}&apikey=${import.meta.env.VITE_API_KEY}`
+        )
+        return data;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.log("error message: ", error.message);
+            return error.message;
+        } else {
+            console.log("unexpected error: ", error);
+            return "an expected error has occured."
+        }
+    };
 }
+;
+export const getBalanceSheet = async (query: string) => {
+    try {
+        const data = await axios.get<CompanyIncomeStatement[]>(
+            `https://financialmodelingprep.com/stable/balance-sheet-statement?symbol=${query}&apikey=${import.meta.env.VITE_API_KEY}`
+        )
+        return data;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.log("error message: ", error.message);
+            return error.message;
+        } else {
+            console.log("unexpected error: ", error);
+            return "an expected error has occured."
+        }
+    };
+};

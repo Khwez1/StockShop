@@ -4,7 +4,7 @@ import RatioList from '../Components/RatioList'
 
 type Props = {}
 
-const data =
+const testData =
   {
     symbol: "AAPL",
     price: 145.85,
@@ -60,8 +60,8 @@ const DesignGuide = (props: Props) => {
         design guide - This is the design for fin shark. These are reuseable
         components of the app with the breif instructions on how to use them.
       </h1>
-      <RatioList data={data} config={tableConfig}/>
-      <Table />
+      <RatioList data={testData} config={tableConfig}/>
+      <Table data={testData} config={tableConfig}  />
       <h2>
         Table - Table takes in a configuration object and company data as
         params. Use the config to style your table.
