@@ -29,6 +29,20 @@ const Sidebar = (props: Props) => {
               <CiMoneyCheck1 />
               <h6 className="ml-3 relative bottom-0.5">Income Statement</h6>
             </Link>
+            <Link
+              to="balance-sheet"
+              className="flex md:min-w-full text-blueGray-500 text-medium uppercase font-bold block pt-1 pb-4 no-underline"
+            >
+              <CiMoneyCheck1 />
+              <h6 className="ml-3 relative bottom-0.5">Balance Sheet</h6>
+            </Link>
+            <Link
+              to="cashflow-statement"
+              className="flex md:min-w-full text-blueGray-500 text-medium uppercase font-bold block pt-1 pb-4 no-underline"
+            >
+              <CiMoneyCheck1 />
+              <h6 className="ml-3 relative bottom-0.5">Cashflow Statement</h6>
+            </Link>
           </div>
         </div>
       </div>

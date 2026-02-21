@@ -1,61 +1,73 @@
-import { useEffect, useState } from 'react'
-import { useOutletContext } from 'react-router-dom';
-import type { CompanyKeyMetrics } from '../../company';
-import { getKeyMetrics } from '../api';
-import RatioList from './RatioList';
+import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
+import type { CompanyKeyMetrics } from "../../company";
+import { getKeyMetrics } from "../api";
+import RatioList from "./RatioList";
+import Spinner from "./Spinner";
+import {
+  formatLargeMonetaryNumber,
+  formatLargeNonMonetaryNumber,
+  formatRatio,
+} from "../Helpers/NumberFormatting";
 
-interface Props {};
+interface Props {}
 
 const tableConfig = [
   {
     label: "Market Cap",
-    render: (company: CompanyKeyMetrics) => company.marketCap,
+    render: (company: CompanyKeyMetrics) =>
+      formatLargeNonMonetaryNumber(company.marketCap),
     subTitle: "Total value of all a company's shares of stock",
   },
   {
     label: "Current Ratio",
-    render: (company: CompanyKeyMetrics) => company.currentRatioTTM,
+    render: (company: CompanyKeyMetrics) => formatRatio(company.currentRatioTTM),
     subTitle:
       "Measures the companies ability to pay short term debt obligations",
   },
   {
     label: "Return On Equity",
-    render: (company: CompanyKeyMetrics) => company.returnOnEquityTTM,
+    render: (company: CompanyKeyMetrics) => formatRatio(company.returnOnEquityTTM),
     subTitle:
       "Return on equity is the measure of a company's net income divided by its shareholder's equity",
   },
   {
     label: "Return On Assets",
-    render: (company: CompanyKeyMetrics) => company.returnOnTangibleAssetsTTM,
+    render: (company: CompanyKeyMetrics) =>
+      formatRatio(company.returnOnTangibleAssetsTTM),
     subTitle:
       "Return on assets is the measure of how effective a company is using its assets",
   },
   {
-    label: "Free Cashflow Per Share",
-    render: (company: CompanyKeyMetrics) => company.freeCashFlowYieldTTM,
+    label: "Free Cashflow to Equity",
+    render: (company: CompanyKeyMetrics) =>
+      formatLargeMonetaryNumber(company.freeCashFlowToEquityTTM),
     subTitle:
-      "Return on assets is the measure of how effective a company is using its assets",
+      "Return amount of cash the business is available to be potentially distributed to shareholders",
   },
   {
-    label: "Book Value Per Share TTM",
-    render: (company: CompanyKeyMetrics) => company.netCurrentAssetValueTTM,
+    label: "Free Cashflow to Firm",
+    render: (company: CompanyKeyMetrics) =>
+      formatLargeMonetaryNumber(company.freeCashFlowToFirmTTM),
     subTitle:
-      "Book value per share indicates a firm's net asset value (total assets - total liabilities) on per share basis",
+      "The cash flow available to all funding providers (debt holders, preferred stockholders, common stockholders, convertible bond investors, etc.",
   },
   {
-    label: "Divdend Yield TTM",
-    render: (company: CompanyKeyMetrics) => company.earningsYieldTTM,
-    subTitle: "Shows how much a company pays each year relative to stock price",
+    label: "Earnings Yield TTM",
+    render: (company: CompanyKeyMetrics) => formatRatio(company.earningsYieldTTM),
+    subTitle:
+      "Shows how much a company earns per share each year relative to stock price",
   },
   {
-    label: "Capex Per Share TTM",
-    render: (company: CompanyKeyMetrics) => company.capexToOperatingCashFlowTTM,
+    label: "Capex to Operating Cashflow",
+    render: (company: CompanyKeyMetrics) =>
+      formatRatio(company.capexToOperatingCashFlowTTM),
     subTitle:
       "Capex is used by a company to aquire, upgrade, and maintain physical assets",
   },
   {
     label: "Graham Number",
-    render: (company: CompanyKeyMetrics) => company.grahamNumberTTM,
+    render: (company: CompanyKeyMetrics) => formatRatio(company.grahamNumberTTM),
     subTitle:
       "This is the upperbouind of the price range that a defensive investor should pay for a stock",
   }
@@ -80,10 +92,10 @@ const CompanyProfile = (props: Props) => {
           <RatioList data={companyData} config={tableConfig} />
         </>
       ) : (
-        <>Loading...</>
+        <Spinner />
       )}
     </>
   );
 };
 
-export default CompanyProfile
+export default CompanyProfile;
