@@ -18,9 +18,22 @@ namespace api.Data
         }
         public DbSet<Stock> Stock { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Portfolio> Portfolios { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Portfolio>(x => x.HasKey(p => new { p.UserId, p.StockId }));
+
+            builder.Entity<Portfolio>()
+                .HasOne(u => u.User)
+                .WithMany(P => P.Portfolios)
+                .HasForeignKey(U => U.UserId);
+
+            builder.Entity<Portfolio>()
+                .HasOne(s => s.Stock)
+                .WithMany(P => P.Portfolios)
+                .HasForeignKey(S => S.StockId);
 
             List<IdentityRole> roles = new List<IdentityRole>
             {
