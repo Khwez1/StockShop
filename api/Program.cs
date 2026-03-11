@@ -69,11 +69,9 @@ builder.Services.AddHttpClient<IFMPService, FMPService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+
 
 app.UseCors(x => x
     .AllowAnyMethod()
