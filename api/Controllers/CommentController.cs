@@ -16,6 +16,7 @@ using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace api.Controllers
 {
+    [Authorize]
     [Route("api/comment")]
     [ApiController]
     public class CommentController : ControllerBase
@@ -33,7 +34,6 @@ namespace api.Controllers
             _fMPService = fMPService;
         } 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetAll([FromQuery]CommentQueryObject queryObject)
         {
             if (!ModelState.IsValid)

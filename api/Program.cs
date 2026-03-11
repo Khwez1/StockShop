@@ -76,13 +76,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
 app.UseCors(x => x
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowCredentials()
-    //.WithOrigins(https://)
+    .WithOrigins("http://localhost:5173")
     .SetIsOriginAllowed(origin => true)
 );
 
