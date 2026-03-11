@@ -1,11 +1,8 @@
-import React from "react";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { useAuth } from "../Context/UseAuth";
 
-interface Props {}
-
-const Navbar = (props: Props) => {
+const Navbar = () => {
   const { isLoggedIn, user, logout } = useAuth();
   return (
     <nav className="relative container mx-auto p-6">

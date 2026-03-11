@@ -1,4 +1,4 @@
-import React, { type SyntheticEvent } from 'react'
+import { type SyntheticEvent } from 'react'
 
 type Props = {
     onPortfolioCreate: (e: SyntheticEvent) => void;

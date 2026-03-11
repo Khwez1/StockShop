@@ -1,8 +1,4 @@
-import React from "react";
-
-interface Props {}
-
-const DesignPage = (props: Props) => {
+const DesignPage = () => {
   return (
     <></>
   );

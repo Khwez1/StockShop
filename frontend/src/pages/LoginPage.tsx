@@ -3,8 +3,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../Context/UseAuth";
 import { useForm } from "react-hook-form";
 
-type Props = {};
-
 type LoginFormInputs = {
   userName: string;
   password: string;
@@ -15,7 +13,7 @@ const validation = Yup.object().shape({
   password: Yup.string().required("Password is required"),
 });
 
-const LoginPage = (props: Props) => {
+const LoginPage = () => {
   const { loginUser } = useAuth();
   const {
     register,

@@ -6,10 +6,6 @@ import RatioList from './RatioList';
 import Spinner from './Spinner';
 import { formatLargeMonetaryNumber } from '../Helpers/NumberFormatting';
 
-interface Props {
-
-}
-
 const config = [
   {
     label: <div className="font-bold">Total Assets</div>,
@@ -78,7 +74,7 @@ const config = [
   },
 ];
 
-const BalanceSheet = (props: Props) => {
+const BalanceSheet = () => {
     const ticker = useOutletContext<string>();
     const [balanceSheet, setBalanceSheet] = useState<CompanyBalanceSheet>()
     useEffect(() => {

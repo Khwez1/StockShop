@@ -53,7 +53,7 @@ export const UserProvider = ({ children }: Props) => {
         toast.success("Login Success!")
         navigate("/Search");
       }
-    }).catch((e) => toast.warning("Server error occured"));
+    }).catch(() => toast.warning("Server error occured"));
   };
 
   const loginUser = async (
@@ -73,7 +73,7 @@ export const UserProvider = ({ children }: Props) => {
         toast.success("Login Success!")
         navigate("/Search");
       }
-    }).catch((e) => toast.warning("Server error occured"));
+    }).catch(() => toast.warning("Server error occured"));
   };
 
   const isLoggedIn = () => {

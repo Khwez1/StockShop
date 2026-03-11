@@ -17,7 +17,7 @@ const validation = Yup.object().shape({
   content: Yup.string().required("Content is required"),
 });
 
-const StockCommentForm = ({ symbol, handleComment }: Props) => {
+const StockCommentForm = ({ handleComment }: Props) => {
   const {
     register,
     handleSubmit,

@@ -1,8 +1,5 @@
-import React from 'react'
 import Table from '../Components/Table'
 import RatioList from '../Components/RatioList'
-
-type Props = {}
 
 const testData =
   {
@@ -53,7 +50,7 @@ const tableConfig = [
   },
 ]
 
-const DesignGuide = (props: Props) => {
+const DesignGuide = () => {
   return (
     <>
       <h1>

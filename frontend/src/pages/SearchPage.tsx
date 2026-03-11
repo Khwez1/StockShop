@@ -8,9 +8,8 @@ import type { PortfolioGet } from "../Models/Portfolio";
 import { portfolioAddAPI, portfolioDeleteAPI, portfolioGetAPI } from "../Services/PortfolioService";
 import { toast } from "react-toastify";
 
-interface Props {};
 
-const SearchPage = (props: Props) => {
+const SearchPage = () => {
   const [search, setSearch] = useState<string>("");
   const [portfolioValues, setPortfolioValues] = useState<PortfolioGet[] | null>([]);
   const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
@@ -30,7 +29,7 @@ const SearchPage = (props: Props) => {
       if (res?.data) {
         setPortfolioValues(res?.data)
       }
-    }).catch((e) => {
+    }).catch(() => {
       toast.warning("Could not get portfolio values!");
     })
   };
@@ -43,7 +42,7 @@ const SearchPage = (props: Props) => {
         toast.success("Stock added to portfolio!")
         getPortfolio();
       }
-    }).catch((e) => {
+    }).catch(() => {
       toast.warning("Could not create portfolio!")
     })
   };

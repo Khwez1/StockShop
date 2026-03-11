@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { CompanyProfile } from "../../company";
 import { getCompanyProfile } from "../api";
@@ -7,9 +7,7 @@ import CompanyDashboard from "../Components/CompanyDashboard";
 import Tile from "../Components/Tile";
 import Spinner from "../Components/Spinner";
 
-interface Props {}
-
-const CompanyPage = (props: Props) => {
+const CompanyPage = () => {
   let { ticker } = useParams();
   const [company, setCompany] = useState<CompanyProfile>();
 

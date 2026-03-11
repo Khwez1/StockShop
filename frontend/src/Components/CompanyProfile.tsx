@@ -11,8 +11,6 @@ import {
 } from "../Helpers/NumberFormatting";
 import StockComment from "./StockComment";
 
-interface Props {}
-
 const tableConfig = [
   {
     label: "Market Cap",
@@ -74,7 +72,7 @@ const tableConfig = [
   }
 ];
 
-const CompanyProfile = (props: Props) => {
+const CompanyProfile = () => {
   const ticker = useOutletContext<string>();
   const [companyData, setCompanyData] = useState<CompanyKeyMetrics>();
 
